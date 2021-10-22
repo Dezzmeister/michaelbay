@@ -8,9 +8,11 @@ import org.apache.logging.log4j.Logger;
 import com.obama69.michaelbay.event.LivingDeathListener;
 import com.obama69.michaelbay.event.LivingJumpListener;
 import com.obama69.michaelbay.event.RightClickListeners;
+import com.obama69.michaelbay.event.WorldTickListener;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.monster.Skeleton;
@@ -28,6 +30,7 @@ public class MichaelBay {
         MinecraftForge.EVENT_BUS.register(new LivingDeathListener());
         MinecraftForge.EVENT_BUS.register(new LivingJumpListener());
         MinecraftForge.EVENT_BUS.register(new RightClickListeners());
+        MinecraftForge.EVENT_BUS.register(new WorldTickListener());
     }
     
     public static boolean isExplosive(final Entity entity) {
@@ -37,6 +40,7 @@ public class MichaelBay {
     		}
     	}
     	
-    	return false;
+    	return entity instanceof LivingEntity;
+    	//return false;
     }
 }
